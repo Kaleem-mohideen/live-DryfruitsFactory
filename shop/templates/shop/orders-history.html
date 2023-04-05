@@ -1,0 +1,170 @@
+{% extends 'shop/basic.html' %}
+{% load static %}
+{% block body %}
+  <main class="main-content">
+    <div class="container-fluid breadcrumb-fluid">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb p-0 bg-transparent">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item active">Orders History</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+    <div class="container" id="container-info">
+        <div class="section-name color-000 mb-4">
+                User Details
+        </div>
+        <form id="form" action="{% url 'pay' %}" method="post">
+            {% csrf_token %}
+            <div class="col-md-6 px-0">
+                <div class="box-element" id="form-wrapper">
+                    <div id="user-info">
+                        <div class="mb-3">
+                            <input required type="email" class="form-control" name="email" placeholder="Email ID">
+                        </div>
+                         <button id="form-submit" class="btn bg-primarycolor color-000 w-100 text-uppercase text-white mt-4 proceed-btn py-2 " type="submit">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div id = "ordersHistory-info" class="container-fluid ordersHistory">
+      <div class="container">
+          <div class="mb-4">
+              <div class="font-weight-bold color-000 aboutus-sectionheading mb-2">
+                Orders History
+              </div>
+          </div>
+          <div class="table-responsive mb-5">
+            <table class="table table-hover table-striped orders-table">
+                <thead>
+                    <tr>
+                        <th>
+                            S.NO
+                        </th>
+                        <th>
+                            Order ID
+                        </th>
+                        <th style='text-align:center; vertical-align:middle'>
+                            Products ( Track )
+                        </th>
+                        <th>
+                            Date
+                        </th>
+                        <th>
+                            Status
+                        </th>
+                        <th>
+                            Amount
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- {{ordersHistory}} -->
+                    {% for order in ordersHistory %}
+                    <tr>
+                        <td>
+                            {{forloop.counter}}
+                        </td>
+                        <td>
+                            {{order.order_id}}
+                        </td>
+                        <td style='text-align:center; vertical-align:middle'>
+                             <a href="{% url 'shop:track-order' order.order_id %}"><img src="{% static 'shop/img/others/orderTracking.jpg' %}" style="max-width: 30%;" alt="Track" /></a>
+                        </td>
+                        <td>
+                            {{order.date_ordered}}
+                        </td>
+                        
+                        {% if order.complete and order.status.status == "Delivered" %}
+                        <td>
+                            Delivered
+                        </td>
+                        {% elif order.complete and order.status.status == "Shipped" %}
+                        <td>
+                            Shipped
+                        </td>
+                        {% elif order.complete %}
+                        <td>
+                            Ordered
+                        </td>
+                        {% else %}
+                        <td>
+                            Order Pending
+                        </td>
+                        {% endif %}
+                        <td>
+                            <i class="fas fa-rupee-sign"></i> {{order.get_cart_total_with_deliverycharge|floatformat:2}}
+                        </td>
+                    </tr>
+                    {% empty %}
+                       <p>No Record Found</p>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+      </div>
+  </div>
+  </main>
+<script type="text/javascript" src="{% static 'shop/js/jquery.min.js' %}"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+    if (user != 'AnonymousUser'){
+            document.getElementById('container-info').classList.add("hidden");
+         }
+    if (user == 'AnonymousUser'){
+            document.getElementById('ordersHistory-info').classList.add("hidden");
+            $('#form').off('submit').submit(function (e) {
+               //ajax call here
+
+               //stop form submission
+                e.preventDefault();
+                // var dataArray = $(this).serializeArray();
+                var myformData = new FormData(e.target);
+                const email = myformData.get("email");
+                // console.log(dataArray);
+                console.log(email);
+                var url = "/order-history/";
+                $('.loading-spinner').show();
+                $('.loading-spinner').hide();
+                $.ajax({
+
+                    url: url,
+                    headers:{
+
+                            'X-CSRFToken':csrftoken,
+                        },
+
+                    type: 'POST',
+                    data: {'email':email},
+                    // dataType: 'json',
+                    // dataType: 'json',
+                    // contentType: "application/json; charset=utf-8",
+                    success: function (res, status) {
+                      console.log(typeof res)
+                      console.log(res)
+
+                      // console.log(eval(res))
+                      $('.ordersHistory').html(res);
+                      document.getElementById('ordersHistory-info').classList.remove("hidden");
+                      // $('.ordersHistory').html('').on('load',res);
+
+
+                    },
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        alert(textStatus);
+                        alert(XMLHttpRequest.status);
+                        alert(errorThrown)
+                    }
+                  });
+
+
+
+                    });
+            }
+
+});
+</script>
+{% endblock body %}

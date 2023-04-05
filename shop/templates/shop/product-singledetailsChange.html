@@ -1,0 +1,124 @@
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'shop/css/easyzoom.css' %}">
+<link rel="stylesheet" href="{% static 'shop/css/jquery-ui.css' %}">
+<div class="product-singleprice mb-2">
+    <div class="product-offerprice color-000 d-inline-block me-3">
+        <i class="fas fa-rupee-sign"></i> <span class="offer-price">{{productSelected_item.get_total|floatformat}}</span>
+    </div>
+    <div class="product-originalprice color-000 d-inline-block">
+        <i class="fas fa-rupee-sign"></i> <span class="actual-price">{{productSelected_item.get_actual_total|floatformat}}</span>
+    </div>
+</div>
+<div class="worksans-regular color-000 text-uppercase mb-3">
+    Category: {{productSelected.category}}
+</div>
+<div class="mb-3 py-3">
+
+    <div class="row m-0">
+        <div class="mr-3">
+            <div class="worksans-regular color-000 text-capitalize mb-2">
+            Quantity
+            </div>
+            <div class="quantity">
+                <input type="number" min="0" max="{{productSelected_item.subProduct.ava_quantity}}" id="productselectedquantity" step="1" value={{productSelected_item.quantity}} class="quantity-count" disabled>
+                <div class="quantity-nav">
+                    <button data-wholesale="{{wholesale}}" data-product="{{productSelected.id}}" data-action="remove" class="quantity-button quantity-down update-cart"><img src="{% static 'shop/img/minus.png' %}" class="img-fluid"></button>
+                    <button data-wholesale="{{wholesale}}" data-product="{{productSelected.id}}" data-action="add" class="quantity-button quantity-up update-cart"><img src="{% static 'shop/img/plus.png' %}" class="img-fluid"></button>
+                </div>
+            </div>
+        </div>
+        <div class="weights-section">
+            <div class="worksans-regular color-000 text-capitalize mb-2">
+            Quantity (Wt.)
+            </div>
+            <select id="selectedweight{{productSelected.id}}" class="form-control w-auto">
+                {% for weight in productSelected_item.subProduct.available_weights.all|dictsort:"weight" %}
+                <option value="{{weight}}" {% if weight == FR_FIELD %}selected{% endif %}>{{weight}}</option>
+                {% empty %}
+                    No weights!
+                {% endfor %}
+
+            </select>
+        </div>
+    </div>
+</div>
+<div class="worksans-regular color-000 text-uppercase mb-2">
+    Description
+</div>
+<div class="product-singledescription">
+    <p>
+        {{productSelected.desc|linebreaks}}
+    </p>
+
+</div>
+
+<div class="d-flex mt-3">
+    <button id="btn{{productSelected.id}}" data-wholesale="{{wholesale}}" data-product={{productSelected.id}} data-action="add" class="btn bg-primarycolor text-white productSingleAddCart worksans-semibold px-4 py-2 mr-3 update-cart">
+          <span id={{productSelected.id}}>  Add to cart </span>
+        </button>
+        <a href="{% url 'shop:Cart' %}" class="btn border px-4 py-2">View cart</a>
+</div>
+{% block js %}
+
+<script type="text/javascript" src="{% static 'shop/js/jquery.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'shop/js/easyzoom.js' %}"></script>
+<script type="text/javascript" src="{% static 'shop/js/main.js' %}"></script>
+{% endblock %}
+<script type="text/javascript">
+    {% if itemIn %}
+        console.log("itemIn")
+        document.getElementById({{productSelected.id}}).innerHTML = 'Added';
+        $('#btn{{productSelected.id}}').attr('disabled', 'disabled');
+    {% else %}
+        console.log("itemIn", "notIn")
+        document.getElementById({{productSelected.id}}).innerHTML = 'Add to cart';
+        $('#btn{{productSelected.id}}').removeAttr("disabled");
+    {% endif %}
+</script>
+
+<script>
+    $("#selectedweight{{productSelected.id}}").change(function () {
+
+        const quantityCount = $('.quantity-count').val()
+        const url = "{% url 'shop:ajax_load_price' %}";
+        const weight = $(this).val();
+        const id = {{productSelected.id}}
+        const subproductId = {{productSelected_item.subProduct.id}}
+        var wholesale = {{wholesale}}
+
+        if (user == 'AnonymousUser'){
+            if (quantityCount > 0) {
+
+                    cart[id][wholesale]['selectedweight'] = weight
+
+            }
+            document.cookie ='cart=' + JSON.stringify(cart) + ";domain=;path=/"
+
+
+        }
+        $.ajax({
+            url: url,
+            data: {
+                'weight': weight,
+                'product_id': {{productSelected.id}},
+                'quantity' : quantityCount,
+                'subproductId' : {{productSelected_item.subProduct.id}}
+            },
+            success: function (data) {
+
+                const myArr = data.split(" - ");
+                if (quantityCount > 0) {
+                    $('.offer-price').html(parseFloat(myArr[0])* quantityCount);
+                    $('.actual-price').html(parseFloat(myArr[1])* quantityCount);
+                } else {
+                    $('.offer-price').html(parseFloat(myArr[0]));
+                    $('.actual-price').html(parseFloat(myArr[1]));
+                }
+
+
+            }
+        });
+
+    });
+</script>

@@ -1,0 +1,36 @@
+{% load static %}
+{% for i in productSimilar|slice:"0:"%}
+    <div class="col px-2 mb-4 wow animate__ animate__fadeInUp animated">
+        <div class="product-box">
+
+            <a href="/productsingle/{{i.product.id}}?Wholesale={{wholesale}}" class="stretched-link"></a>
+            <div class="product-imgbox p-3">
+                <img src='{{i.product.imageURL}}' class="img-fluid position-relative">
+            </div>
+            <div class="worksans-medium p-3">
+                <div class="product-name" id="namepr{{i.product.id}}">
+                    {{i.product.product_name}}
+                </div>
+                <div>
+                    <span class="d-inline-block product-price color-333 me-2">
+                        <i class="fas fa-rupee-sign"></i> {{i.offer_price}}
+                    </span>
+                    <span class="d-inline-block product-oldprice color-666">
+                        <i class="fas fa-rupee-sign"></i> {{i.actual_price}}
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+{% empty %}
+    <h2>There are no items in this list</h2>
+{% endfor %}
+
+<script>
+{% if not productSimilar.all|slice:"0:" %}
+    document.getElementById('related-product').classList.add("hidden");
+{% else %}
+    document.getElementById('related-product').classList.remove("hidden");
+{% endif %}
+
+</script>

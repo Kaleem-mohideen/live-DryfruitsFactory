@@ -1,0 +1,80 @@
+{% load static %}
+    <div class="container">
+          <div class="mb-4">
+              <div class="font-weight-bold color-000 aboutus-sectionheading mb-2">
+                Orders History
+              </div>
+          </div>
+          <div class="table-responsive mb-5">
+            <table class="table table-hover table-striped orders-table">
+                <thead>
+                    <tr>
+                        <th>
+                            S.NO
+                        </th>
+                        <th>
+                            Order ID
+                        </th>
+                        <th style='text-align:center; vertical-align:middle'>
+                            Products ( Track )
+                        </th>
+                        <th>
+                            Date
+                        </th>
+                        <th>
+                            Status
+                        </th>
+                        <th>
+                            Amount
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- {{ordersHistory}} -->
+                    {% for order in ordersHistory %}
+                    <tr>
+                        <td>
+                            {{forloop.counter}}
+                        </td>
+                        <td>
+                            {{order.order_id}}
+                        </td>
+                        <td style='text-align:center; vertical-align:middle'>
+                             <a href="{% url 'shop:track-order' order.order_id %}"><img src="{% static 'shop/img/others/orderTracking.jpg' %}" style="max-width: 30%;" alt="Track" /></a>
+                        </td>
+                        <td>
+                            {{order.date_ordered}}
+                        </td>
+                        
+                        {% if order.complete and order.status.status == "Delivered" %}
+                        <td>
+                            Delivered
+                        </td>
+                        {% elif order.complete and order.status.status == "Shipped" %}
+                        <td>
+                            Shipped
+                        </td>
+                        {% elif order.complete %}
+                        <td>
+                            Ordered
+                        </td>
+                        {% else %}
+                        <td>
+                            Order Pending
+                        </td>
+                        {% endif %}
+
+                        <td>
+                            <i class="fas fa-rupee-sign"></i> {{order.get_cart_total_with_deliverycharge|floatformat:2}}
+                        </td>
+                    </tr>
+                    {% empty %}
+                       <p>No Record Found</p>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+<script type="text/javascript">
+
+</script>

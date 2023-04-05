@@ -1,0 +1,257 @@
+{% extends 'shop/basic.html' %}
+{% block body %}
+{% load static %}
+{% load mathfilters %}
+  <main class="main-content">
+    <div class="container-fluid breadcrumb-fluid">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb p-0 bg-transparent">
+                    <li class="breadcrumb-item"><a href="\">Home</a></li>
+                    <li class="breadcrumb-item"><a href="javascript:void(0);">Shipping</a></li>
+                    <li class="breadcrumb-item active">Payment</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="container">
+            <div class="section-name color-000 mb-4">
+                Payment
+            </div>
+
+                <div class="row mb-4">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-8 mb-4 mb-lg-0">
+                        <div class="payment-details pr-lg-5">
+                            <form id="formUser" name="userInfo" action="{% url 'pay' %}" method="post">
+                            {% csrf_token %}
+                                <div class="box-element" id="form-wrapper">
+                                    <div id="user-info" class="mb-4">
+                                        <div class="d-md-flex justify-content-between align-items-center mb-3">
+                                            <div class="payment-heading  color-000 mb-2 mb-md-0">
+                                                Contact Information
+                                            </div>
+                                            <div class="color-666">
+                                                Already have an account?
+                                                <a href="#loginModal" data-toggle="modal" id="login-btn" class="btn px-1 py-0 rounded-0 d-inline-block pointer color-000">Login</a>
+                                            </div>
+                                        </div>
+                                        <div class="row mx-n2">
+                                            <div class="col-12 col-sm-12 col-md-6 px-2">
+                                                <div class="mb-3">
+                                                    <input required type="text" class="form-control" name="fname" placeholder="First Name" value="">
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-sm-12 col-md-6 px-2">
+                                                <div class="mb-3">
+                                                    <input required type="text" class="form-control" name="lname" placeholder="Last Name" value="">
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-sm-12 col-md-6 px-2">
+                                                <div class="mb-3">
+                                                    <!-- <input required type="number" class="form-control" name="contactNo" placeholder="Contact Number" value=""> -->
+                                                    <input required type="text" name="contactNo" placeholder="Contact Number" class="form-control bfh-phone" data-country="IN">
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-sm-12 col-md-6 px-2">
+                                                <div class="mb-3">
+                                                    <input required type="email" class="form-control" name="email" placeholder="Email ID" value="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="shipping-info">
+                                        <div class="payment-heading  color-000 mb-2">
+                                            Shipping address
+                                        </div>
+
+                                        <div class="row mx-n2">
+
+                                            <div class="col-12 col-sm-12 col-md-12 px-2">
+                                                <div class="form-field mb-3">
+                                                    <textarea required class="form-control h-auto" rows="4" name="address" placeholder="Address"></textarea>
+                                                </div>
+                                            </div>
+                                            <!-- <div class="col-12 col-sm-12 col-md-6 px-2">
+                                                <div class="form-field mb-3">
+                                                    <input required type="text" class="form-control" placeholder="Floor No">
+                                                </div>
+                                            </div> -->
+                                            <div class="col-12 col-sm-12 col-md-6 px-2">
+                                                <div class="form-field mb-3">
+                                                    <select class="form-control" name="Country" id="country" required>
+                                                        <option value="" selected="" hidden="">Select Country</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-sm-12 col-md-6 px-2">
+                                                <div class="form-field mb-3">
+                                                    <select class="form-control" name="state" id="state" required>
+                                                        <option value="" selected="" hidden="">Select State</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-sm-12 col-md-6 px-2">
+                                                <div class="form-field mb-3">
+                                                    <select class="form-control" name="city" id="city" required>
+                                                        <option value="" selected="" hidden="">Select City</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-sm-12 col-md-6 px-2">
+                                                <div class="form-field mb-3">
+                                                    <input required type="number" name="pincode" class="form-control" placeholder="Pincode">
+                                                </div>
+                                            </div>
+                                            <div class="form-field px-2">
+                                                <label class="options-checkbox position-relative pointer color-666">
+                                                    <span class="d-inline-block">
+                                                        <input type="checkbox" name="brand">
+                                                        <span class="custom-checkbox rounded-0"></span>
+                                                    </span>
+                                                    <span>
+                                                        Save this Address
+                                                    </span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <button id="make-payment" type="submit" class="btn bg-primarycolor text-white text-uppercase
+                                         px-4 py-2 mt-4">Make payment</button>
+                                    </div>
+                                </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-8 col-lg-4 mb-4 mb-lg-0">
+                        <div class="orderbox">
+                            <ul class="p-3 payment-cartlist mb-0 list-unstyled border-bottom">
+                                {% for item in items %}
+                                <li>
+                                    <div class="row mx-n2 align-items-center">
+                                        <div class="col-4 col-md-3 col-lg-4 px-2">
+                                            <img src="{{item.subProduct.product.imageURL}}" class="img-fluid">
+                                        </div>
+                                        <div class="col-8 col-md-9 col-lg-8 px-2">
+                                            <div class="cart-productname  color-333">
+                                                {{item.subProduct.product.product_name}} - {{item.weightSelected}} ({{item.subProduct.productType.type}})
+                                            </div>
+                                            <div class="color-333 payment-productcount">
+                                                <span class="d-inline-block montserrat-semibold">
+                                                    {{item.quantity}} x
+                                                </span>
+                                                <span class="d-inline-block ">
+                                                    ₹ {{ item.get_total|div:item.quantity }}
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                            <div class="cart-subtotal px-4 py-3">
+                                <div class="d-flex justify-content-between">
+                                    <div class="montserrat-semibold text-uppercase">
+                                        sub total- ({{order.get_cart_items}} Items)
+                                    </div>
+                                    <div class="">
+                                        ₹ {{order.get_cart_total|floatformat:2}}
+                                    </div>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <div class="montserrat-semibold text-uppercase">
+                                        Delivery Charges
+                                    </div>
+                                    <div class="">
+                                        ₹ {{order.deliverycharge}}
+                                    </div>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <div class="montserrat-semibold text-uppercase">
+                                        GST
+                                    </div>
+                                    <div class="">
+                                        ₹ {{order.gstcharge}}
+                                    </div>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <div class="montserrat-semibold text-uppercase">
+                                        total
+                                    </div>
+                                    <div class="">
+                                        ₹ {{order.get_cart_total_with_deliverycharge|floatformat:2}}
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+
+        </div>
+    </div>
+  </main>
+
+    <script type="text/javascript">
+        if (!String.prototype.format) {
+          String.prototype.format = function() {
+            var args = arguments;
+            return this.replace(/{(\d+)}/g, function(match, number) {
+              return typeof args[number] != 'undefined'
+                ? args[number]
+                : match
+              ;
+            });
+          };
+        }
+        var shipping = '{{order.shipping}}'
+        var total = '{{order.get_cart_total_with_deliverycharge}}' //'5100' //'{{order.get_cart_total}}'
+
+        if (shipping == 'False'){
+            document.getElementById('shipping-info').innerHTML = ''
+        }
+
+        if (user != 'AnonymousUser'){
+            var str="{{order.customer.user.email}}";
+
+            {% if order.customer.user.email %}
+                document.forms['userInfo']['email'].value = "{0}".format('{{order.customer.user.email}}');
+            {% endif %}
+
+            {% if order.customer.user.first_name %}
+                document.forms['userInfo']['fname'].value = "{0}".format('{{order.customer.user.first_name}}');
+            {% endif %}
+
+            {% if order.customer.user.last_name %}
+                document.forms['userInfo']['lname'].value = "{0}".format('{{order.customer.user.last_name}}');
+            {% endif %}
+
+            {% if order.customer.user.phone_number %}
+                document.forms['userInfo']['contactNo'].value = "{0}".format('{{order.customer.user.phone_number}}');
+            {% endif %}
+
+
+         }
+
+        if (shipping == 'False' && user != 'AnonymousUser'){
+            //Hide entire form if user is logged in and shipping is false
+                // document.getElementById('form-wrapper').classList.add("hidden");
+                //Show payment if logged in user wants to buy an item that does not require shipping
+                // document.getElementById('payment-info').classList.remove("hidden");
+        }
+
+        var form = document.getElementById('form')
+        // $('form-button').click(function(e){
+        //     e.preventDefault();
+        //     console.log('Form Submitted...');
+        //     document.getElementById('form-button').classList.add("hidden");
+        //     document.getElementById('payment-info').classList.remove("hidden");
+        // })
+
+        // document.getElementById('make-payment').addEventListener('click', function(e){
+
+        // })
+
+
+    </script>
+{% endblock body %}

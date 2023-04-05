@@ -1,0 +1,90 @@
+[
+  {
+    "model": "shop.Category",
+    "pk": 1,
+    "fields": {
+      "category_name": "Dry Fruits"
+
+    }
+  },
+  {
+    "model": "shop.Category",
+    "pk": 2,
+    "fields": {
+      "category_name": "Seeds"
+
+    }
+  },
+  {
+    "model": "shop.Category",
+    "pk": 3,
+    "fields": {
+      "category_name": "Dry Fruit Mix"
+
+    }
+  },
+  {
+    "model": "shop.Category",
+    "pk": 4,
+    "fields": {
+      "category_name": "Spices"
+
+    }
+  },
+  {
+    "model": "shop.Category",
+    "pk": 5,
+    "fields": {
+      "category_name": "Gift Box"
+
+    }
+  },
+  {
+    "model": "shop.DeliveryCharge",
+    "pk": 1,
+    "fields": {
+      "delivery_charge": 0
+
+    }
+  },
+  {
+    "model": "shop.GSTCharge",
+    "pk": 1,
+    "fields": {
+      "gst_charge": 0
+
+    }
+  },
+  {
+    "model": "shop.ProductType",
+    "pk": 1,
+    "fields": {
+      "type": "Retail"
+
+    }
+  },
+  {
+    "model": "shop.ProductType",
+    "pk": 2,
+    "fields": {
+      "type": "Wholesale"
+
+    }
+  },
+  {
+    "model": "shop.StatusTrack",
+    "pk": 1,
+    "fields": {
+      "status": "Shipped"
+
+    }
+  },
+  {
+    "model": "shop.StatusTrack",
+    "pk": 2,
+    "fields": {
+      "status": "Delivered"
+
+    }
+  }
+]

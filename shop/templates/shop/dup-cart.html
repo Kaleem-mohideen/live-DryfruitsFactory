@@ -1,0 +1,117 @@
+{% load static %}
+                <div class="col-12 col-sm-12 col-md-12 col-lg-8 mb-4 mb-lg-0 pr-lg-5">
+                    {% for item in items %}
+                    <div class="p-2 cart-productlist{{item.subProduct.id}} mb-3">
+
+                        <div class="row mx-n2">
+                            <div class="col-sm-9 px-2">
+                                <div class="row mx-n2 align-items-center">
+                                    <div class="col-4 px-2">
+                                        <img src="{{item.subProduct.product.imageURL}}" class="img-fluid">
+                                    </div>
+                                    <div class="col-8 px-2">
+                                        <div class="cart-productname worksans-medium color-333 mb-2">
+                                            {{item.subProduct.product.product_name}}  ({{item.subProduct.productType.type}})
+                                        </div>
+                                        ({{item.weightSelected}})
+                                        <div class="worksans-regular color-000 text-uppercase mb-2">
+                                            Quantity
+                                        </div>
+
+                                        <div class="quantity cart-productquantity">
+                                            <input type="number" min="0" max="{{item.subProduct.ava_quantity}}" step="1" value={{item.quantity}} id="quantity-count{{item.subProduct.id}}" class="quantity-count rounded">
+                                            <div class="quantity-nav">
+                                                {% if item.subProduct.productType.type == "Wholesale" %}
+                                                <button data-wholesale="true" data-product="{{item.subProduct.product.id}}" data-action="add" class="quantity-button quantity-up update-cart"><img src="{% static 'shop/img/plus.png' %}" class="img-fluid"></button>
+                                                <button data-wholesale="true" data-product="{{item.subProduct.product.id}}" data-action="remove" class="quantity-button quantity-down update-cart"><img src="{% static 'shop/img/minus.png' %}" class="img-fluid"></button>
+                                                {% elif item.subProduct.productType.type == "Retail" %}
+                                                <button data-wholesale="false" data-product="{{item.subProduct.product.id}}" data-action="add" class="quantity-button quantity-up update-cart"><img src="{% static 'shop/img/plus.png' %}" class="img-fluid"></button>
+                                                <button data-wholesale="false" data-product="{{item.subProduct.product.id}}" data-action="remove" class="quantity-button quantity-down update-cart"><img src="{% static 'shop/img/minus.png' %}" class="img-fluid"></button>
+                                                {% endif %}
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3 px-2">
+                                <div class="text-right cart-productprice p-3">
+                                    <div class="product-cartprice worksans-medium color-333">
+                                        <i class="fas fa-rupee-sign"></i> <span class="offer-price{{item.subProduct.id}}">{{item.get_total|floatformat}}</span>
+                                        <i class="color-666">(<span class="actual-price{{item.subProduct.id}} product-originalprice">{{item.get_actual_total|floatformat}}</span>)</i>
+                                    </div>
+                                    {% if item.subProduct.productType.type == "Wholesale" %}
+                                    <button data-wholesale="true" data-product="{{item.subProduct.product.id}}" data-action="delete" class="btn p-0 rounded-0 px-2 py-1 worksans-medium color-000 text-uppercase update-cart">
+                                        <svg class="svg-inline--fa fa-trash-alt fa-w-14" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="trash-alt" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M32 464a48 48 0 0 0 48 48h288a48 48 0 0 0 48-48V128H32zm272-256a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zm-96 0a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zm-96 0a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zM432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16z"></path></svg><!-- <i class="fas fa-trash-alt"></i> --> Remove
+                                    </button>
+                                    {% elif item.subProduct.productType.type == "Retail" %}
+                                    <button data-wholesale="false" data-product="{{item.subProduct.product.id}}" data-action="delete" class="btn p-0 rounded-0 px-2 py-1 worksans-medium color-000 text-uppercase update-cart">
+                                        <svg class="svg-inline--fa fa-trash-alt fa-w-14" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="trash-alt" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M32 464a48 48 0 0 0 48 48h288a48 48 0 0 0 48-48V128H32zm272-256a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zm-96 0a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zm-96 0a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zM432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16z"></path></svg><!-- <i class="fas fa-trash-alt"></i> --> Remove
+                                    </button>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                <div class="col-12 col-sm-12 col-md-6 ms-auto col-lg-4 mb-4 mb-lg-0">
+                    <div class="orderbox">
+                        <div class="text-uppercase worksans-medium color-000 p-4 orderbox-heading">
+                            Order summary
+                        </div>
+                        <div class="cart-itemsbox px-4 py-4">
+                            <div class="color-000 text-uppercase mb-4">
+                                Subtotal (<span class="items">{{order.get_cart_items}}</span> Items)
+                            </div>
+                            <ul class="cart-itemslist mb-0 list-unstyled color-000 text-uppercase">
+                                <li>
+                                    <div>
+                                        sub total
+                                    </div>
+                                    <div>
+                                        <i class="fas fa-rupee-sign"></i> <span class="sub_total">{{order.get_cart_total|floatformat}}</span>
+                                        <i class="color-666">(<span class="actual_sub_total product-originalprice">{{order.get_cart_actual_total|floatformat}}</span>)</i>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div>
+                                        Total savings
+                                    </div>
+                                    <div>
+                                        <i class="fas fa-rupee-sign"></i> <span class="total_savings">{{order.get_cartSavingsfrom_actual_total|floatformat}}</span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div>
+                                        Delivery Charges
+                                    </div>
+                                    <div>
+                                        <i class="fas fa-rupee-sign"></i> <span class="deliveryCharge"> {{order.deliverycharge}}</span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div>
+                                        GST
+                                    </div>
+                                    <div>
+                                        <i class="fas fa-rupee-sign"></i> <span class="GST"> {{order.gstcharge}}</span>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="cart-subtotal px-4 py-3">
+                            <div class="d-flex justify-content-between">
+                                <div class="montserrat-semibold text-uppercase">
+                                  Total
+                                </div>
+                                <div class="worksans-medium">
+                                    <i class="fas fa-rupee-sign"></i> <span class="total">{{order.get_cart_total_with_deliverycharge|floatformat}}</span>
+                                </div>
+                            </div>
+                            <a class="btn bg-primarycolor color-000 w-100 worksans-semibold text-uppercase mt-4 proceed-btn py-2" href="{% url 'shop:Payment' %}">
+                                proceed to checkout
+                            </a>
+                        </div>
+                    </div>
+                </div>

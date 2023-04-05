@@ -1,0 +1,105 @@
+{% extends 'shop/basic.html' %}
+{% block body %}
+  <main class="main-content">
+    <div class="container-fluid breadcrumb-fluid">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb p-0 bg-transparent">
+                    <li class="breadcrumb-item"><a href="\">Home</a></li>
+                    <li class="breadcrumb-item active">Contact Us</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+    <div class="container-fluid py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-sm-12 col-md-12 col-lg-7 mb-5">
+                    <form action="/contactus" method="post">{% csrf_token %}
+                        <div class="pr-lg-5">
+                            <div class="mb-3">
+                                <label class="color-333 mb-1">
+                                    Name
+                                </label>
+                                <div>
+                                    <input type="text" class="form-control" placeholder="Enter Your Name" id="contactUsername" name = 'name'>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="color-333 mb-1">
+                                    Number
+                                </label>
+                                <div>
+                                    <input type="number" class="form-control" placeholder="Enter Your Number" id="contactUsernumber" name = 'phone'>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="color-333 mb-1">
+                                    Email ID
+                                </label>
+                                <div>
+                                    <input type="email" class="form-control" placeholder="Enter Your Email" id="contactUseremail" name = 'email'>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="color-333 mb-1">
+                                    Message
+                                </label>
+                                <div>
+                                    <textarea class="form-control h-auto" rows="4" placeholder="How May We Help You" id="contactUsermessage" name = 'msg'></textarea>
+                                </div>
+                            </div>
+                            <button class="btn bg-primarycolor color-000 worksans-semibold text-uppercase rounded px-4 py-2" id="contactSubmitbtn">
+                                Send
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-5 mb-4 mb-lg-0">
+                    <div class="mb-3">
+                        <div class="page-name font-weight-bold color-000 text-uppercase mb-3">
+                            Registered and Corporate Office
+                        </div>
+                        <address class="color-333">
+                            No. 46, Pulianthope High Road,
+                            Pulianthope, Chennai-600012, Tamil Nadu - India
+                        </address>
+                    </div>
+                    <div class="mb-3">
+                        <div class="font-weight-bold color-000 text-capitalize">
+                            Timings
+                        </div>
+                        <div class="color-333">
+                            Monday - Saturday : 11:00am - 7:30pm
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <div class="font-weight-bold color-000 text-capitalize ">
+                            Phone
+                        </div>
+                        <a class="color-333" href="tel: +91 9791144573">
+                            +91 9791144573
+                        </a>
+                    </div>
+                    <div class="mb-3">
+                        <div class="font-weight-bold color-000 text-capitalize">
+                            Whatsapp
+                        </div>
+                        <a onclick="clicky.log(window.location.href, 'WhatsApp');" class="color-333" href="https://api.whatsapp.com/send?phone=+918667317481&amp;text=Hello,%20Write%20to%20us.." target="_blank">
+                            +91 8667317481
+                        </a>
+                    </div>
+                    <div class="mb-3">
+                        <div class="font-weight-bold color-000 text-capitalize">
+                            Email Address
+                        </div>
+                        <a class="color-333" href="mailto:dryfruitsfactory@gmail.com">
+                            dryfruitsfactory@gmail.com
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </main>
+{% endblock %}

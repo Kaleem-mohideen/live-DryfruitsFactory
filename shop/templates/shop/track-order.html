@@ -1,0 +1,193 @@
+{% extends 'shop/basic.html' %}
+{% block body %}
+{% load static %}
+{% load mathfilters %}
+    <div class="main-content flex-fill">
+            <div class="container-fluid breadcrumb-fluid">
+                <div class="container">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb p-0 bg-transparent">
+                            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                            <li class="breadcrumb-item active">Track Order</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+            <div class="container-fluid">
+                <div class="container">
+                    <div class="section-name color-000 mb-4">
+                        Track Order
+                    </div>
+                    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 row-cols-lg-5 mb-3">
+                        <div class="col mb-2 mb-lg-0">
+                            <div>
+                                <label class="text-uppercase color-666 worksans-regular trackorder-label">
+                                    order id
+                                </label>
+                                <div class="text-uppercase color-333 worksans-medium">
+                                    {{order.order_id}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col mb-2 mb-lg-0">
+                            <div>
+                                <label class="text-uppercase color-666 worksans-regular trackorder-label">
+                                    order placed
+                                </label>
+                                <div class="text-capitalize color-333 worksans-medium">
+                                    {{order.date_ordered}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col mb-2 mb-lg-0">
+                            <div>
+                                <label class="text-uppercase color-666 worksans-regular trackorder-label">
+                                    order status
+                                </label>
+                                <div class="text-capitalize color-333 worksans-medium" id= "orderStatus">
+                                    Order Pending
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col mb-2 mb-lg-0">
+                            <div>
+                                <label class="text-uppercase color-666 worksans-regular trackorder-label">
+                                    Payment
+                                </label>
+                                <div class="text-capitalize color-333 worksans-medium">
+                                    Online
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col mb-2 mb-lg-0">
+                            <div>
+                                <label class="text-uppercase color-666 worksans-regular trackorder-label">
+                                    order total
+                                </label>
+                                <div class="text-capitalize color-333 worksans-medium">
+                                    ₹ {{order.get_cart_total_with_deliverycharge|floatformat:2}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="trackorder-box p-2 mb-4">
+                        <div class="row mx-n2 align-items-center">
+                            <div class="col-12 col-sm-3 col-lg-3 col-xl-3 mb-3 mb-lg-0 px-2">
+
+                                <div class="orderbox">
+
+                                        {% for item in items %}
+                                        <ul class="p-3 payment-cartlist mb-0 list-unstyled border-bottom">
+                                        <li>
+                                            <div class="row mx-n2 align-items-center">
+                                                <div class="col-4 col-md-3 col-lg-4 px-2">
+                                                    <img src="{{item.subProduct.product.imageURL}}" class="img-fluid">
+                                                </div>
+                                                <div class="col-8 col-md-9 col-lg-8 px-2">
+                                                    <div class="cart-productname  color-333">
+                                                        {{item.subProduct.product.product_name}}
+                                                    </div>
+                                                    <div class="color-333 payment-productcount">
+                                                        <span class="d-inline-block montserrat-semibold">
+                                                            {{item.quantity}} x
+                                                        </span>
+                                                        <span class="d-inline-block ">
+                                                            ₹ {{ item.get_total|div:item.quantity }}
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        </ul>
+                                        {% endfor %}
+
+                                    <div class="cart-subtotal px-4 py-3">
+                                        <div class="d-flex justify-content-between">
+                                            <div class="montserrat-semibold text-uppercase">
+                                                sub total- ({{order.get_cart_items}} Items)
+                                            </div>
+                                            <div class="">
+                                                ₹ {{order.get_cart_total|floatformat:2}}
+                                            </div>
+                                        </div>
+                                        <div class="d-flex justify-content-between">
+                                            <div class="montserrat-semibold text-uppercase">
+                                                Delivery Charges
+                                            </div>
+                                            <div class="">
+                                                ₹ {{order.deliverycharge}}
+                                            </div>
+                                        </div>
+                                        <div class="d-flex justify-content-between">
+                                            <div class="montserrat-semibold text-uppercase">
+                                                GST
+                                            </div>
+                                            <div class="">
+                                                ₹ {{order.gstcharge}}
+                                            </div>
+                                        </div>
+                                        <div class="d-flex justify-content-between">
+                                            <div class="montserrat-semibold text-uppercase">
+                                                total
+                                            </div>
+                                            <div class="">
+                                                ₹ {{order.get_cart_total_with_deliverycharge|floatformat:2}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12  col-sm-12 col-lg-9 col-xl-9">
+
+                                <ul id="trackorder-progress" class="text-center">
+                                    <li id="ordered" class="">
+                                        <span>
+                                            Ordered
+                                        </span>
+                                    </li>
+                                    <li id="shippedId"  class="">
+                                        <span>
+                                            Shipped
+                                        </span>
+                                    </li>
+                                    <li id="inprogressId" class="">
+                                        <span>
+                                            In-Progress
+                                        </span>
+                                    </li>
+                                    <li id="deliveredId" class="">
+                                        <span>
+                                            Delivered
+                                        </span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+
+<script>    
+    const div = document.getElementById('orderStatus');
+    {% if order.complete and order.status.status == "Delivered" %}
+        document.getElementById("ordered").className = "completed";
+        document.getElementById("shippedId").className = "completed";
+        document.getElementById("inprogressId").className = "completed";
+        document.getElementById("deliveredId").className = "completed";
+        div.textContent = 'Delivered';
+        // $('#orderStatus').html(Ordered");
+    {% elif order.complete and order.status.status == "Shipped" %}
+        document.getElementById("ordered").className = "completed";
+        document.getElementById("shippedId").className = "completed";
+        div.textContent = 'Shipped';
+    {% elif order.complete %}
+        document.getElementById("ordered").className = "completed";
+        div.textContent = 'ordered';
+    {% else %}
+        div.textContent = 'Order Pending';
+    {% endif %}
+</script>
+{% endblock %}

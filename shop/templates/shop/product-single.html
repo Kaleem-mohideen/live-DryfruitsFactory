@@ -1,0 +1,172 @@
+ {% extends 'shop/basic.html' %}
+ {% block body %}
+ {% load static %}
+  <main class="main-content">
+    <div class="container-fluid breadcrumb-fluid">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb p-0 bg-transparent">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/productlist">Products List</a></li>
+                    <li class="breadcrumb-item active">Dry Fruits</li>
+                </ol>
+            </nav>
+          </div>
+      </div>
+      <div class="container-fluid mb-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-sm-12 col-md-12 col-lg-7 pl-lg-0">
+                    <div class="row mx-0 flex-column flex-md-row">
+                        <div class="col-12 col-md-2 p-0 mb-5 mb-md-0">
+                            <ul class="thumbnails d-flex flex-md-column">
+                                <li class="me-2 me-md-0 mb-md-3">
+                                    <a href="{% static 'shop/img/others/collection-img-1.jpg' %}" class="stretched-link" data-standard="{% static 'shop/img/others/collection-img-1.jpg' %}">
+                                        <img src="{% static 'shop/img/others/collection-img-1.jpg' %}" alt="" class="img-fluid">
+                                    </a>
+                                </li>
+                                <li class="me-2 me-md-0 mb-md-3">
+                                    <a href="{% static 'shop/img/others/collection-img-2.jpg' %}" class="stretched-link" data-standard="{% static 'shop/img/others/collection-img-2.jpg' %}">
+                                        <img src="{% static 'shop/img/others/collection-img-2.jpg' %}" alt="" class="img-fluid">
+                                    </a>
+                                </li>
+                                <li class="me-2 me-md-0 mb-md-3">
+                                    <a href="{% static 'shop/img/others/collection-img-3.jpg' %}" class="stretched-link" data-standard="{% static 'shop/img/others/collection-img-3.jpg' %}">
+                                        <img src="{% static 'shop/img/others/collection-img-3.jpg' %}" alt="" class="img-fluid">
+                                    </a>
+                                </li>
+                                <li class="me-2 me-md-0 mb-md-3">
+                                    <a href="{% static 'shop/img/others/collection-img-4.jpg' %}" class="stretched-link" data-standard="{% static 'shop/img/others/collection-img-4.jpg' %}">
+                                        <img src="{% static 'shop/img/others/collection-img-4.jpg' %}" alt="" class="img-fluid">
+                                    </a>
+                                </li>
+                                <li class="me-2 me-md-0 mb-md-3">
+                                    <a href="{% static 'shop/img/others/collection-img-5.jpg' %}" class="stretched-link" data-standard="{% static 'shop/img/others/collection-img-5.jpg' %}">
+                                        <img src="{% static 'shop/image/others/collection-img-5.jpg' %}" alt="" class="img-fluid">
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-md-10 order-first order-md-1 p-0 pl-md-4">
+                            <div class="product-singlebox p-4 mb-4 mb-lg-0">
+                                <div class="easyzoom easyzoom--overlay easyzoom--with-thumbnails">
+                                    <a href="{{productSelected.imageURL}}">
+                                        <img src="{{productSelected.imageURL}}" alt="" class="img-fluid">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-12 col-md-7 col-lg-5 pr-lg-0">
+                    <div class="product-singledetails">
+                        <div class="product-singlename worksans-semibold color-000 mb-2" id="namepr{{productSelected.id}}">
+                            {{productSelected.product_name}}
+                        </div>
+                        <div class="collection-switchbtn d-inline-flex align-items-center justify-content-between">
+                        <div class="left align-self-center">
+                          <h5 class="m-0">Retail</h5>
+                        </div>
+                        <div class="switchbtn-toggle align-self-center mx-2">
+                          <label class="switch">
+                            <input type="checkbox" id="checkbox{{productSelected.id}}" checked>
+                            <span class="slider round"></span>
+                          </label>
+                        </div>
+                        <div class="right align-self-center">
+                          <h5 class="m-0">Wholesale</h5>
+                        </div>
+                      </div>
+                        <div class="product-singleChangedetails">
+                            {% include 'shop/product-singledetailsChange.html' %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid py-4" id ="related-product">
+        <div class="container">
+            <div class="section-name color-000 mb-3">
+                related products
+            </div>
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 mx-n2 justify-content-center overflow-hidden product-singleRelatedProducts">
+                {% include 'shop/product-singleRelatedProducts.html' %}
+            </div>
+        </div>
+    </div>
+  </main>
+{% block js %}
+<script type="text/javascript" src="{% static 'shop/js/easyzoom.js' %}"></script>
+{% endblock %}
+<script type="text/javascript">
+    console.log({{wholesale}});
+    console.log(typeof({{wholesale}}));
+
+
+    var value = 1;
+    var checkbox{{productSelected.id}} = document.getElementById("checkbox{{productSelected.id}}")
+    checkbox{{productSelected.id}}.checked = value
+    $("#checkbox{{productSelected.id}}").prop("checked" , {{wholesale}});
+    var url = "/checkSwitchToggle/";
+    checkbox{{productSelected.id}}.addEventListener("change", function(element){
+      $('.loading-spinner').show();
+        fetch(url, {
+            method:'POST',
+            headers:{
+                'Content-Type':'application/json',
+                'X-CSRFToken':csrftoken,
+            },
+            body:JSON.stringify({"productId": {{productSelected.id}}, "value": checkbox{{productSelected.id}}.checked })
+
+        })
+        .then((response) => {
+           return response.json();
+        })
+        .then((data) => {
+            console.log(data)
+
+            if(data[{{productSelected.id}}] == "true"){
+                console.log("true")
+                $('.loading-spinner').hide();
+                $("#checkbox{{productSelected.id}}").prop("checked" , true);
+                $('.product-singleChangedetails').html('').load(
+                            "{% url 'shop:Prod_single' productSelected.id %}?Wholesale=" + true
+                );
+                $('.product-singleRelatedProducts').html('').load(
+                            "{% url 'shop:Prod_singleRelated' productSelected.id %}?Wholesale=" + true
+                );
+
+
+            }else if(data[{{productSelected.id}}] == "false"){
+                console.log("false")
+                $('.loading-spinner').hide();
+                $("#checkbox{{productSelected.id}}").prop("checked" , false);
+                $('.product-singleChangedetails').html('').load(
+                            "{% url 'shop:Prod_single' productSelected.id %}?Wholesale=" + false
+                );
+                $('.product-singleRelatedProducts').html('').load(
+                            "{% url 'shop:Prod_singleRelated' productSelected.id %}?Wholesale=" + false
+                );
+
+            }else{
+                $('.loading-spinner').hide();
+                $('.offer-price').html(0);
+                $('.actual-price').html(0);
+                $('#btn{{productSelected.id}}').attr("data-wholesale", null);
+                console.log("none")
+
+                document.getElementById({{ productSelected.id }}).innerHTML = 'out of Stock';
+                $('#btn{{ productSelected.id }}').attr('disabled', 'disabled');
+            }
+
+        });
+
+        console.log(typeof(checkbox{{productSelected.id}}.checked))
+        console.log(checkbox{{productSelected.id}}.checked)
+        console.log("here")
+    });
+</script>
+
+
+ {% endblock %}

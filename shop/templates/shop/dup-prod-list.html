@@ -1,0 +1,116 @@
+{% load static %}
+{% load mes_tags %}
+
+            {% for obj in myFilter.qs %}
+            {% for category in False|in_category:obj %}
+            <h1>{{ category }}</h1><h4>({{productType}})</h4>
+            {% endfor %}
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 row-cols-xxl-5 mx-n2 justify-content-center overflow-hidden">
+            {% format_string '%s - %s - %s' obj prod_Price_Range productTypevalue as Category_Pricerange_String %}
+            {% for i in True|in_category:Category_Pricerange_String %}
+
+
+                <div class="col px-2 mb-4 wow animate__animated animate__fadeInUp">
+                    <div class="product-listbox">
+                        {% if i.productType == wholesaleObj %}
+                         <a id="myAnchor{{i.product.id}}" href="/productsingle/{{i.product.id}}?Wholesale=true" class="stretched-link"></a>
+                         {% else %}
+                         <a id="myAnchor{{i.product.id}}" href="/productsingle/{{i.product.id}}?Wholesale=false" class="stretched-link"></a>
+                         {% endif %}
+
+                        <div class="product-imgbox p-3">
+                            <span class="offer-tag">{{i.offer_percentage|floatformat:-2}}% off</span>
+
+                            <img src='{{i.product.imageURL}}' class="img-fluid position-relative prd-img">
+                        </div>
+                        <div class="worksans-medium p-3">
+                            <div class="product-name" id="namepr{{i.product.id}}">
+                                {{i.product.product_name}}
+                            </div>
+                            <div>
+                                <span class="d-inline-block product-price color-333 me-2">
+                                    <i class="fas fa-rupee-sign"></i> {{i.offer_price|floatformat}}
+                                </span>
+                                <span class="d-inline-block product-oldprice color-666">
+                                  <i class="fas fa-rupee-sign"></i> {{i.actual_price|floatformat}}
+                                </span>
+                            </div>
+                            {% if i.productType == wholesaleObj %}
+                            <button id="btn{{i.product.id}}" data-wholesale="true" data-product={{i.product.id}} data-action="add" class="btn bg-primarycolor text-white btn-addtocart montserrat-semibold position-relative update-cart mt-3 text-capitalize"> <span id={{i.product.id}}><i class="fas fa-shopping-cart"></i> Add to Cart </span> </button>
+                            {% else %}
+                            <button id="btn{{i.product.id}}" data-wholesale="false" data-product={{i.product.id}} data-action="add" class="btn bg-primarycolor text-white btn-addtocart montserrat-semibold position-relative update-cart mt-3 text-capitalize"> <span id={{i.product.id}}><i class="fas fa-shopping-cart"></i> Add to Cart </span> </button>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                {% empty %}
+                <h2>There are no items in this list</h2>
+                {% endfor %}
+            </div>
+            <!-- <div class="text-center my-4">
+              <button class="btn bg-primarycolor color-000  montserrat-bold text-uppercase more-btn px-3 py-2 text-white" id="moreProductsbtn">
+                  View more products
+              </button>
+            </div> -->
+            {% endfor %}
+<script type="text/javascript">
+
+</script>
+<script type="text/javascript" src="{% static 'shop/js/jquery.min.js' %}"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+console.log("hey")
+lastSelected = $('[name="category"]:checked').val();
+console.log("lastSelected",lastSelected)
+lastSelected1 = $('[name="productType"]:checked').val();
+console.log("lastSelected1", lastSelected1)
+if(location.pathname.startsWith("/productlist/")){
+
+              {% for item in items %}
+                var prodTypeId = {{ item.subProduct.productType.id }}
+                console.log(prodTypeId)
+                if(lastSelected1 == prodTypeId && (lastSelected == {{ item.subProduct.product.category.id }} || lastSelected == "on")){
+                    document.getElementById({{ item.subProduct.product.id }}).innerHTML = 'added';
+                    $('#btn{{ item.subProduct.product.id }}').attr('disabled', 'disabled');
+                }
+              {% endfor %}
+            }
+var rad = document.myForm.category;
+var prev = null;
+for (var i = 0; i < rad.length; i++) {
+    rad[i].addEventListener('change', function() {
+        (prev) ? console.log("previous", prev.value): null;
+        if (this !== prev) {
+            prev = this;
+        }
+        console.log(this.value)
+        lastSelected = $('[name="category"]:checked').val();
+        console.log("category",lastSelected)
+        lastSelected1 = $('[name="productType"]:checked').val();
+        console.log("productType",lastSelected1)
+        var url = "{% url 'shop:Prod_list' %}?category=" + lastSelected + "&productType=" + lastSelected1
+        console.log(url)
+        window.location.href = url;
+    });
+}
+var rad1 = document.myForm1.productType;
+var prev1 = null;
+for (var i = 0; i < rad1.length; i++) {
+    rad1[i].addEventListener('change', function() {
+        (prev1) ? console.log("previous", prev1.value): null;
+        if (this !== prev1) {
+            prev1 = this;
+        }
+        console.log(this.value)
+        lastSelected = $('[name="category"]:checked').val();
+        console.log("category",lastSelected)
+        lastSelected1 = $('[name="productType"]:checked').val();
+        console.log("productType",lastSelected1)
+        var url = "{% url 'shop:Prod_list' %}?category=" + lastSelected + "&productType=" + lastSelected1
+        console.log(url)
+        window.location.href = url;
+    });
+}
+
+});
+</script>

@@ -1,0 +1,572 @@
+{% extends 'shop/basic.html' %}
+{% block body %}
+ {% load static %}
+  <div class="header-bottom">
+    <div class="owl-carousel owl-theme owl-carousel-banner" id="bannerCarousel">
+      <div class="item">
+        <img src="{% static 'shop/img/banner/banner.png' %}" class="img-fluid" width="100%" alt="banner">
+        <div class="banner-contents">
+          <div class="container">
+            <div class="banner-details">
+              <div class="banner-info text-center">
+                <h3>Dry Fruits
+                  Factory</h3>
+                <p>we produce hand crafted nuts products</p>
+                <p>Provide high quality nuts without compromise</p>
+                <a class="btn" href="/productlist">shop now</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="item">
+        <img src="{% static 'shop/img/banner/banner.png' %}" class="img-fluid" width="100%" alt="banner">
+        <div class="banner-contents">
+          <div class="container">
+            <div class="banner-details">
+              <div class="banner-info text-center">
+                <h3>Dry Fruits
+                  Factory</h3>
+                <p>we produce hand crafted nuts products</p>
+                <p>Provide high quality nuts without compromise</p>
+                <a class="btn" href="/productlist">shop now</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <main class="main-content">
+    {% load mes_tags %}
+      <!-- categories section start here -->
+      <section class="categories-section">
+        <div class="container">
+          <div class="section-heading">
+            <h3>Top Categories</h3>
+          </div>
+          <div class="categories-wrap">
+            <div class="owl-carousel owl-theme owl-carousel-categories" id="categoryCarousel">
+              <div class="item">
+                {% existsCategory 3 as categoryExists %}
+                      {% if categoryExists %}
+                        <a href="{% url 'shop:Prod_list' %}?category=3&productType=1" class="stretched-link"></a>
+                      {% else %}
+                        <a href="{% url 'shop:Prod_list' %}" class="stretched-link"></a>
+                      {% endif %}
+                <div class="categories-cont-wrap">
+                  <div class="categories-img" style="background: url('{% static 'shop/img/others/categories-img-1.png' %}') no-repeat center / cover;"></div>
+                  <div class="categories-contents text-center">
+                    <h3>Dry Fruit Mix</h3>
+                  </div>
+                </div>
+              </div>
+              <div class="item">
+                {% existsCategory 1 as categoryExists %}
+                      {% if categoryExists %}
+                        <a href="{% url 'shop:Prod_list' %}?category=1&productType=1" class="stretched-link"></a>
+                      {% else %}
+                        <a href="{% url 'shop:Prod_list' %}" class="stretched-link"></a>
+                      {% endif %}
+                <div class="categories-cont-wrap">
+                  <div class="categories-img" style="background: url('{% static 'shop/img/others/categories-img-2.png' %}') no-repeat center / cover;"></div>
+                  <div class="categories-contents text-center">
+                    <h3>Dry Fruits</h3>
+                  </div>
+                </div>
+              </div>
+              <div class="item">
+                {% existsCategory 4 as categoryExists %}
+                      {% if categoryExists %}
+                        <a href="{% url 'shop:Prod_list' %}?category=4&productType=1" class="stretched-link"></a>
+                      {% else %}
+                        <a href="{% url 'shop:Prod_list' %}" class="stretched-link"></a>
+                      {% endif %}
+                <div class="categories-cont-wrap">
+                  <div class="categories-img" style="background: url('{% static 'shop/img/others/categories-img-3.png' %}') no-repeat center / cover;"></div>
+                  <div class="categories-contents text-center">
+                    <h3>SPICES</h3>
+                  </div>
+                </div>
+              </div>
+              <div class="item">
+                {% existsCategory 5 as categoryExists %}
+                      {% if categoryExists %}
+                        <a href="{% url 'shop:Prod_list' %}?category=5&productType=1" class="stretched-link"></a>
+                      {% else %}
+                        <a href="{% url 'shop:Prod_list' %}" class="stretched-link"></a>
+                      {% endif %}
+                <div class="categories-cont-wrap">
+                  <div class="categories-img" style="background: url('{% static 'shop/img/others/categories-img-4.png' %}') no-repeat center / cover;"></div>
+                  <div class="categories-contents text-center">
+                    <h3>GIFT BOX</h3>
+                  </div>
+                </div>
+              </div>
+              <div class="item">
+                {% existsCategory 2 as categoryExists %}
+                      {% if categoryExists %}
+                        <a href="{% url 'shop:Prod_list' %}?category=2&productType=1" class="stretched-link"></a>
+                      {% else %}
+                        <a href="{% url 'shop:Prod_list' %}" class="stretched-link"></a>
+                      {% endif %}
+                <div class="categories-cont-wrap">
+                  <div class="categories-img" style="background: url('{% static 'shop/img/others/categories-img-6.jpg' %}') no-repeat center / cover;"></div>
+                  <div class="categories-contents text-center">
+                    <h3>SEEDS</h3>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- categories section end here -->
+
+      <!-- about section start here -->
+      <section class="about-section">
+        <div class="container">
+          <div class="section-heading">
+            <h3>About us</h3>
+          </div>
+            <p>Welcome to our DRYFRUITSFACTORY.COM.  We all know 'HEALTH IS WEALTH' is a famous proverb in english, but we always take our health for granted. People spend for various items without considering their health. It is advised by many medical zones and their science regarding eating of dry fruits regularly to keep their health fit.  It is better to have some dry fruits rather than eating junk foods and spoiling our health. Earlier to medical science our ayurveda has also proved that by adding dry fruits to our daily diet will regulate our metabolism.  There are many varities of dry fruits which help us grow our body from infant to old age.</p>
+            <div class="text-center">
+              <a href="javascript:void(0);" class="btn-readmore"> READ MORE </a>
+            </div>
+          </div>
+        </div>
+      </section> 
+      <!-- about section end here -->
+
+      <!-- collection section start here -->
+      <section class="collection-section">
+        <div class="container-fluid">
+          <div class="section-heading">
+            <h3>Latest collections</h3>
+          </div>
+          <div class="collection-wrap">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 row-cols-xxl-6 mx-0 mx-md-n2 g-4">
+              {% for i in product|slice:"0:"%}
+              <div class="col">
+                <div class="product-listbox">
+                <span class="offer-tag offerPercentage{{i.id}}">0% off</span>
+                <a id="myAnchor{{i.id}}" href="/productsingle/{{i.id}}" class="stretched-link"></a>
+                <div class="item collection-main-wrapper">
+                  <div class="collection-cont-wrap">
+                    <div class="collection-img">
+                      <img src='{{i.imageURL}}' class="img-fluid prd-img" alt="collection-img" />
+                    </div>
+                    <div class="collection-contents text-center">
+                      <h3 class="product-name text-truncate" id="namepr{{i.id}}">{{i.product_name}}</h3>
+                      <div class="collection-switchbtn d-flex justify-content-between">
+                        <div class="left align-self-center">
+                          <h6>retail</h6>
+                        </div>
+                        <div class="switchbtn-toggle align-self-center mx-2">
+                          <label class="switch">
+                            <input type="checkbox" id="checkbox{{i.id}}" checked>
+                            <span class="slider round"></span>
+                          </label>
+                        </div>
+                        <div class="right align-self-center">
+                          <h6>Wholesale</h6>
+                        </div>
+                      </div>
+                      <div class="star d-flex justify-content-center">
+                        <div class="rating">
+                          <i class="fa fa-star" aria-hidden="true"></i>
+                          <i class="fa fa-star" aria-hidden="true"></i>
+                          <i class="fa fa-star" aria-hidden="true"></i>
+                          <i class="fa fa-star" aria-hidden="true"></i>
+                          <i class="fa fa-star" aria-hidden="true"></i>
+                        </div>
+                        <span class="starrating">(25)</span>
+                      </div>
+
+                      <h5 class="product-price"><i class="fas fa-rupee-sign"></i> <span class="price{{i.id}}"> {{i.offer_price|floatformat}}</span></h5>
+
+                      <button id="btn{{i.id}}" data-wholesale="true" data-product={{i.id}} data-action="add" class="btn-addtocart update-cart"> <span id={{i.id}}><i class="fas fa-shopping-cart"></i> add to cart </span> </button>
+
+                    </div>
+                  </div>
+                </div>
+                </div>
+              </div>
+              {% endfor %}
+
+            </div>
+          </div>
+          <div class="text-center mt-4">
+            <a href="#" class="button btn-loadmore">load more</a>
+          <div>
+        </div>
+      </section>
+      <!-- categories section end here -->
+
+
+       <!-- mission section start here -->
+       <section class="mission-section">
+        <div class="container">
+          <div class="row">
+            <div class="col-12 col-lg-7">
+              <div class="text-uppercase">
+                <h3>Our mission is to provide <span> high quality nuts </span> without compromise</h3>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section> 
+      <!-- mission section end here -->
+
+      <!-- gallery section start here -->
+      <section class="gallery-section">
+        <div class="container">
+          <div class="section-heading">
+            <h3>Our gallery</h3>
+          </div>
+          <div class="gallery-wrap">
+            <div class="row m-0">
+              <div class="col-md-7 p-0">
+                <div class="gallery-img text-center animate__animated animate__zoomIn">
+                  <img src="{% static 'shop/img/others/gallery-img-1.jpg' %}" class="img-fluid" alt="gallery-img" />
+                </div>
+              </div>
+              <div class="col-md-5 p-0">
+                <div class="gallery-img text-center animate__animated animate__zoomIn">
+                  <img src="{% static 'shop/img/others/gallery-img-2.jpg' %}" class="img-fluid" alt="gallery-img" />
+                </div>
+              </div>
+              <div class="col-md-4 p-0">
+                <div class="gallery-img text-center animate__animated animate__zoomIn">
+                  <img src="{% static 'shop/img/others/gallery-img-3.jpg' %}" class="img-fluid" alt="gallery-img" />
+                </div>
+              </div>
+              <div class="col-md-4 p-0">
+                <div class="gallery-img text-center animate__animated animate__zoomIn">
+                  <img src="{% static 'shop/img/others/gallery-img-4.jpg' %}" class="img-fluid" alt="gallery-img" />
+                </div>
+              </div>
+              <div class="col-md-4 p-0">
+                <div class="gallery-img text-center animate__animated animate__zoomIn">
+                  <img src="{% static 'shop/img/others/gallery-img-5.jpg' %}" class="img-fluid" alt="gallery-img" />
+                </div>
+              </div>
+              <div class="col-md-7 p-0">
+                <div class="gallery-img text-center animate__animated animate__zoomIn">
+                  <img src="{% static 'shop/img/others/gallery-img-6.jpg' %}" class="img-fluid" alt="gallery-img" />
+                </div>
+              </div>
+              <div class="col-md-5 p-0">
+                <div class="gallery-img text-center animate__animated animate__zoomIn">
+                  <img src="{% static 'shop/img/others/gallery-img-7.jpg' %}" class="img-fluid" alt="gallery-img" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section> 
+      <!-- gallery section end here -->
+
+      <!-- test section start here -->
+      <section class="test-section">
+        <div class="container">
+          <div class="section-heading">
+            <h3>What Our Customers Say About us</h3>
+          </div>
+          <div class="test-wrap">
+            <div class="owl-carousel owl-theme owl-carousel-test" id="feedbackCarousel">
+              <div class="item">
+                <div class="test-contents ">
+                  <div class="star d-flex">
+                      <div class="rating">
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                      </div>
+                      <span class="starrating">(25)</span>
+                    </div>
+                  <p>A first purchase and the texture was wonderfully fresh texture. Will buy again.</p>
+                  <h4>Rashid Junaid,</h4>
+                </div>
+              </div>
+              <div class="item">
+                <div class="test-contents ">
+                  <div class="star d-flex">
+                      <div class="rating">
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                      </div>
+                      <span class="starrating">(25)</span>
+                    </div>
+                  <p>I do a lot of baking, especially in the Winter months and your price on walnuts is the best I have found on line or in the grocery store. I will be sure to order from Dry Fruits Factory again.</p>
+                  <h4>Rashid Junaid,</h4>
+                </div>
+              </div>
+              <div class="item">
+                <div class="test-contents ">
+                  <div class="star d-flex">
+                      <div class="rating">
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                      </div>
+                      <span class="starrating">(25)</span>
+                    </div>
+                  <p>These are picture perfect halves. Seem very fresh and a healthy snack</p>
+                  <h4>Rashid Junaid,</h4>
+                </div>
+              </div>
+              <div class="item">
+                <div class="test-contents ">
+                  <div class="star d-flex">
+                      <div class="rating">
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                      </div>
+                      <span class="starrating">(25)</span>
+                    </div>
+                  <p>These are picture perfect halves. Seem very fresh and a healthy snack</p>
+                  <h4>Rashid Junaid,</h4>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section> 
+      <!-- test section end here -->
+
+      <!-- adsection start here -->
+      <section class="adsection-section">
+        <div class="container">
+          <div class="adsection-wrap">
+            <div class="row">
+              <div class="col-md-4 animate__animated animate__fadeInUp">
+                <div class="adsection-cont-wrap">
+                  <div class="adsection-img ">
+                    <img src="{% static 'shop/img/others/ad-img-1.png' %}" class="img-fluid" alt="adsection-img" />
+                  </div>
+                  <div class="adsection-contents align-self-center">
+                    <h3>Buy nuts - get points</h3>
+                    <p><span class="percent-off">30% off</span> for each product review</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4 animate__animated animate__fadeInUp">
+                <div class="adsection-cont-wrap pl-md-4">
+                  <div class="adsection-img ">
+                    <img src="{% static 'shop/img/others/ad-img-2.png' %}" class="img-fluid" alt="adsection-img" />
+                  </div>
+                  <div class="adsection-contents align-self-center">
+                    <h3>Free delivery</h3>
+                    <p>For orders over <i class="fas fa-rupee-sign"></i>1000</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4 animate__animated animate__fadeInUp">
+                <div class="adsection-cont-wrap">
+                  <div class="adsection-img ">
+                    <img src="{% static 'shop/img/others/ad-img-3.png' %}" class="img-fluid" alt="adsection-img" />
+                  </div>
+                  <div class="adsection-contents align-self-center">
+                    <h3>We Guarantee</h3>
+                    <p>Best price and satisfaction!</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section> 
+      <!-- adsection end here -->
+
+    </main>
+<script type="text/javascript" src="{% static 'shop/js/jquery.min.js' %}"></script>
+<script type="text/javascript">
+Number.prototype.round = function(n) {
+  const d = Math.pow(10, n);
+  return Math.round((this + Number.EPSILON) * d) / d;
+}
+if (!String.prototype.format) {
+  String.prototype.format = function() {
+    var args = arguments;
+    return this.replace(/{(\d+)}/g, function(match, number) {
+      return typeof args[number] != 'undefined'
+        ? args[number]
+        : match
+      ;
+    });
+  };
+}
+
+  var value = 1;
+  $('.loading-spinner').show();
+  //you can put the checkbox in a variable,
+  //this way you do not need to do a javascript query every time you access the value of the checkbox
+    {% for i in product|slice:"0:"%}
+          $('.loading-spinner').show();
+          var checkbox{{i.id}} = document.getElementById("checkbox{{i.id}}")
+
+          checkbox{{i.id}}.checked = value
+          var checked = checkbox{{i.id}}.checked
+
+          var url = "/checkSwitchToggle/";
+
+              fetch(url, {
+                  method:'POST',
+                  headers:{
+                      'Content-Type': 'application/json',
+                      'X-CSRFToken':csrftoken,
+                  },
+                  body:JSON.stringify({"productId": {{i.id}} })
+
+              })
+              .then((response) => {
+                 return response.json();
+              })
+              .then((data) => {
+                  console.log("dta",data)
+                  if (data['subproId'] != undefined){
+                    var subprodId = data['subproId']
+                  }else{
+                    // var subprodId = 0
+                  }
+                  console.log("subprodIdsubprodIdsubprodIdsubprodIdsubprodId",subprodId)
+                  if (data[{{i.id}}] != 'None'){
+                    console.log(eval(data['price{{i.id}}'])[0]['fields']['offer_price'])
+                    var offerprice = eval(data['price{{i.id}}'])[0]['fields']['offer_price'];
+                    var actualprice = eval(data['price{{i.id}}'])[0]['fields']['actual_price'];
+                    var offer_percentage = eval(data['offer_percentage']);
+                    console.log('offer_percentage',offer_percentage)
+                    var itemIn = data['itemIn']
+                  }
+
+
+                  if(data[{{i.id}}] == "true"){
+                    console.log("true")
+                    $("#checkbox{{i.id}}").prop("checked" , true);
+                    $('.price{{i.id}}').html(offerprice);
+                    $('.offerPercentage{{i.id}}').html(offer_percentage.round(2) + "% off");
+                    $('#btn{{i.id}}').attr("data-wholesale", true);
+                    document.getElementById("myAnchor{{i.id}}").href = "/productsingle/{{i.id}}?Wholesale={0}".format(checkbox{{i.id}}.checked);
+                    if (itemIn){
+                          document.getElementById({{ i.id }}).innerHTML = 'Added';
+                          $('#btn{{ i.id }}').attr('disabled', 'disabled');
+                    }else{
+                          document.getElementById({{ i.id }}).innerHTML = 'Add to cart';
+                          $('#btn{{ i.id }}').prop('disabled', false);
+                    }
+
+                  }else if(data[{{i.id}}] == "false"){
+                    console.log("false")
+                    $("#checkbox{{i.id}}").prop("checked" , false);
+                    $('.price{{i.id}}').html(offerprice);
+                    $('.offerPercentage{{i.id}}').html(offer_percentage.round(2) + "% off");
+                    $('#btn{{i.id}}').attr("data-wholesale", false);
+                    document.getElementById("myAnchor{{i.id}}").href = "/productsingle/{{i.id}}?Wholesale={0}".format(checkbox{{i.id}}.checked);
+                    if (itemIn){
+                          document.getElementById({{ i.id }}).innerHTML = 'Added';
+                          $('#btn{{ i.id }}').attr('disabled', 'disabled');
+                    }else{
+                          document.getElementById({{ i.id }}).innerHTML = 'Add to cart';
+                          $('#btn{{ i.id }}').prop('disabled', false);
+                    }
+                  }else{
+                     $('.price{{i.id}}').html(0);
+                    console.log("none")
+                    document.getElementById("myAnchor{{i.id}}").href = "javascript:void(0);";
+                    document.getElementById({{ i.id }}).innerHTML = 'out of Stock';
+                    $('#btn{{i.id}}').attr("data-wholesale", null);
+                    $('#btn{{ i.id }}').attr('disabled', 'disabled');
+                  }
+                  // document.getElementById('{{i.id}}').id = subprodId;
+
+              });
+
+
+
+
+
+          checkbox{{i.id}}.addEventListener("change", function(element){
+               $('.loading-spinner').show();
+
+              fetch(url, {
+                  method:'POST',
+                  headers:{
+                      'Content-Type':'application/json',
+                      'X-CSRFToken':csrftoken,
+                  },
+                  body:JSON.stringify({"productId": {{i.id}}, "value": checkbox{{i.id}}.checked })
+
+              })
+              .then((response) => {
+                 return response.json();
+              })
+              .then((data) => {
+                  console.log(data)
+                  var offerprice = eval(data['price{{i.id}}'])[0]['fields']['offer_price'];
+                  var actualprice = eval(data['price{{i.id}}'])[0]['fields']['actual_price'];
+                  var offer_percentage = eval(data['offer_percentage']);
+                  var itemIn = data['itemIn']
+
+                  if(data[{{i.id}}] == "true"){
+                    console.log("true")
+                    $("#checkbox{{i.id}}").prop("checked" , true);
+                    $('.price{{i.id}}').html(offerprice);
+                    $('.offerPercentage{{i.id}}').html(offer_percentage.round(2) + "% off");
+                    $('#btn{{i.id}}').attr("data-wholesale", true);
+                    document.getElementById("myAnchor{{i.id}}").href = "/productsingle/{{i.id}}?Wholesale={0}".format(checkbox{{i.id}}.checked);
+                    if (itemIn){
+                          document.getElementById({{ i.id }}).innerHTML = 'Added';
+                          $('#btn{{ i.id }}').attr('disabled', 'disabled');
+                    }else{
+                          document.getElementById({{ i.id }}).innerHTML = 'Add to cart';
+                          $('#btn{{ i.id }}').prop('disabled', false);
+                    }
+                  }else if(data[{{i.id}}] == "false"){
+                    console.log("false")
+                    $("#checkbox{{i.id}}").prop("checked" , false);
+                    $('.price{{i.id}}').html(offerprice);
+                    $('.offerPercentage{{i.id}}').html(offer_percentage.round(2) + "% off");
+                    $('#btn{{i.id}}').attr("data-wholesale", false);
+                    document.getElementById("myAnchor{{i.id}}").href = "/productsingle/{{i.id}}?Wholesale={0}".format(checkbox{{i.id}}.checked);
+                    if (itemIn){
+                          document.getElementById({{ i.id }}).innerHTML = 'Added';
+                          $('#btn{{ i.id }}').attr('disabled', 'disabled');
+                    }else{
+                          document.getElementById({{ i.id }}).innerHTML = 'Add to cart';
+                          $('#btn{{ i.id }}').prop('disabled', false);
+                    }
+                  }else{
+                    console.log("none")
+                    $('.price{{i.id}}').html(0);
+                    $('#btn{{i.id}}').attr("data-wholesale", null);
+                    document.getElementById("myAnchor{{i.id}}").href = "javascript:void(0);";
+                    document.getElementById({{ i.id }}).innerHTML = 'out of Stock';
+                    $('#btn{{ i.id }}').attr('disabled', 'disabled');
+                  }
+                $('.loading-spinner').hide();
+              });
+            // document.getElementById("myAnchor{{i.id}}").href = "/productsingle/{{i.id}}?Wholesale={0}".format(checkbox{{i.id}}.checked);
+            //   console.log(typeof(checkbox{{i.id}}.checked))
+            //   console.log(checkbox{{i.id}}.checked)
+            //   console.log("here")
+
+          });
+      $('.loading-spinner').hide();
+    {% endfor %}
+  
+</script>
+ {% endblock %}
+
+

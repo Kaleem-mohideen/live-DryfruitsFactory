@@ -1,0 +1,40 @@
+{% extends 'shop/basic.html' %}
+{% block body %}
+<div class="container">
+<!--     <h1>Callback</h1>
+
+    <h2>Callback Messsage: </h2>                    <br>
+    <h3> Checksum Verification: {{ message }} </h3> <br >
+    MID: {{ MID }}                                  <br>
+    TXNID: {{ TXNID }}                              <br>
+    ORDERID: {{ ORDERID }}                          <br>
+    BANKTXNID: {{ BANKTXNID }}                      <br>
+    TXNAMOUNT: {{ TXNAMOUNT }}                      <br>
+    CURRENCY: {{ CURRENCY }}                        <br>
+    <h3> STATUS: {{ STATUS }} </h3>                 <br>
+    RESPCODE: {{ RESPCODE }}                        <br>
+    RESPMSG: {{ RESPMSG }}                          <br>
+    TXNDATE: {{ TXNDATE }}                          <br>
+    GATEWAYNAME: {{ GATEWAYNAME }}                  <br>
+    BANKNAME: {{ BANKNAME }}                        <br>
+    BIN_NAME: {{ BIN_NAME }}                        <br>
+    PAYMENTMODE: {{ PAYMENTMODE }}                  <br>
+    CHECKSUMHASH: {{ CHECKSUMHASH }} -->
+
+    <div class="col my-4">
+
+        <h1>Payment status regarding your order Id ({{ ORDERID.0 }})</h1>
+        {% if RESPCODE.0 == '01' %}
+        <h3> ORDER SUCCESS </h3>
+        {% else %}
+        <h3> ORDER FAILURE </h3>
+        {% endif%}
+
+        <h4> {{ RESPMSG.0 }} </h4>
+    </div>
+
+</div>
+
+{% endblock%}
+
+

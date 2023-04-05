@@ -1,0 +1,135 @@
+ {% extends 'shop/basic.html' %}
+ {% block body %}
+ <main class="main-content">
+  <div class="container-fluid breadcrumb-fluid">
+    <div class="container">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb p-0 bg-transparent">
+                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                <li class="breadcrumb-item active">Products</li>
+            </ol>
+        </nav>
+      </div>
+  </div>
+    <div class="container">
+        <div class="row mx-n2">
+        <div class="filter-section mb-4">
+            <div class="d-md-none filter-headingbox worksans-semibold text-uppercase mb-3" data-toggle="collapse" data-target="#productFilter">
+                Filters <svg class="svg-inline--fa fa-filter fa-w-16" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="filter" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M487.976 0H24.028C2.71 0-8.047 25.866 7.058 40.971L192 225.941V432c0 7.831 3.821 15.17 10.237 19.662l80 55.98C298.02 518.69 320 507.493 320 487.98V225.941l184.947-184.97C520.021 25.896 509.338 0 487.976 0z"></path></svg><!-- <i class="fas fa-filter"></i> -->
+            </div>
+            <div class="collapse d-md-inline-block" id="productFilter">
+
+                <div class="filter-box mb-3">
+                    <form method="get" id="categoryFilterId" name="myForm">
+                        <div class="d-flex align-items-center justify-content-between mb-3">
+                            <div class="worksans-medium filter-type">
+                                Category
+                            </div>
+                            <div class="">
+                                <button class="btn worksans-medium text-uppercase p-0 clearfilter-btn" id="clearSubcategoryfilters">
+                                    clear
+                                </button>
+                            </div>
+                        </div>
+                        <ul class="list-unstyled filter-list" id='id_categoryfilter'>
+                            <li>
+                                <label class="options-checkbox position-relative pointer color-333">
+                                    <span class="d-inline-block">
+                                        <input type="radio" name="category" id="id_category" checked>  <!-- onchange="this.form.submit();" -->
+                                        <span class="custom-radio"></span>
+                                    </span>
+                                    <span>
+                                        All
+                                    </span>
+                                </label>
+                            </li>
+                            {% for choice in myFilter.form.category %}
+                            <li>
+                                <label class="options-checkbox position-relative pointer color-333">
+                                    <span class="d-inline-block">
+                                        {{ choice.tag }}
+                                        <span class="custom-radio"></span>
+                                    </span>
+                                    <span>
+                                     {{ choice.choice_label }}
+                                    </span>
+                                </label>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </form>
+                </div>
+                <div class="filter-box mb-3">
+                    <form method="get" id="productTypeId" name="myForm1">
+                        <div class="d-flex align-items-center justify-content-between mb-3">
+                            <div class="worksans-medium filter-type">
+                                Type
+                            </div>
+                            <div class="">
+                                <button class="btn worksans-medium text-uppercase p-0 clearfilter-btn" id="clearSubcategoryfilters1">
+                                    clear
+                                </button>
+                            </div>
+                        </div>
+                        <ul class="list-unstyled filter-list">
+                            {% for choice in ProductTypeFilter.form.productType %}
+                            <li>
+                                <label class="options-checkbox position-relative pointer color-333">
+                                    <span class="d-inline-block">
+                                        {{ choice.tag }} <!-- <input type="radio" name="productType" onchange="this.form.submit();" id="id_productType" checked> -->
+                                        <span class="custom-radio"></span>
+                                    </span>
+                                    <span>
+                                        {{ choice.choice_label }}
+                                    </span>
+                                </label>
+                            </li>
+                            {% endfor %}
+                            <!-- <li>
+                                <label class="options-checkbox position-relative pointer color-333">
+                                    <span class="d-inline-block">
+                                        <input type="radio" name="productType" onchange="this.form.submit();" id="id_productType">
+                                        <span class="custom-radio"></span>
+                                    </span>
+                                    <span>
+                                        Retail
+                                    </span>
+                                </label>
+                            </li> -->
+                        </ul>
+                    </form>
+                </div>
+                <div class="filter-box mb-3">
+                    <div class="d-flex align-items-center justify-content-between mb-3">
+                        <div class="worksans-medium filter-type">
+                            Price
+                        </div>
+                        <div class="">
+                            <button class="btn worksans-medium text-uppercase p-0 clearfilter-btn">
+                                clear
+                            </button>
+                        </div>
+                    </div>
+                    <div>
+                        <div id="slider-range" class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all">
+
+                        </div>
+                        <div class="d-flex align-items-center justify-content-between mb-3">
+                            <input type="number" id="min" name="min_price" class="form-control rangeslider-valuebox me-3" readonly="">
+                            <input type="number" id="max" name="max_price" class="form-control rangeslider-valuebox" readonly="">
+                        </div>
+                    </div>
+                    <button class="btn filter-submitbtn text-white ">
+                        Filter
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="product-section">
+            {% include 'shop/dup-prod-list.html' %}
+        </div>
+     </div>
+</div>
+</main>
+{% endblock body %}
+

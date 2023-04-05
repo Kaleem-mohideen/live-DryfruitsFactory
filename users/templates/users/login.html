@@ -1,0 +1,71 @@
+<!-- login modal -->
+{% load crispy_forms_tags %}
+{% load widget_tweaks %}
+{% load static %}
+        <form id="login_form" method="POST" action="{% url 'login' %}">
+            {% csrf_token %}
+
+            <fieldset class="form-group">
+                {% if form.non_field_errors %}
+                <div class="alert alert-block alert-danger"> {{ form.non_field_errors }} </div>
+                {% endif %}
+
+                <div id="div_id_username" class="form-group"><label for="id_username" class=" requiredField">
+                        Email / Username<span class="asteriskField">*</span> </label>
+                    <div class=""> <input type="text" name="username" maxlength="150" class="textinput textInput form-control" required="" id="id_username">
+                        <p id="error_1_id_username" class="invalid-feedback"><strong>This field is required.</strong></p>
+                    </div>
+                </div>
+                <div id="div_id_password" class="form-group"><label for="id_password" class=" requiredField">
+                        Password<span class="asteriskField">*</span> </label>
+                    <div class=""> <input type="password" name="password" autocomplete="current-password" class="textinput textInput form-control" required="" id="id_password">
+                        <p id="error_1_id_password" class="invalid-feedback"><strong>This field is required.</strong></p>
+                    </div>
+                </div>
+            </fieldset>
+            <div class="form-group">
+                <div class="text-right mb-3">
+                    <a data-toggle="modal" href="#forgotPasswordModal" id="forgotPasswordModalbtn" class="color-333">
+                        Forgot Password?
+                    </a>
+                </div>
+                <button class="btn modalsubmit-btn text-white w-100" id="loginModalSubmit" type="submit">
+                    Continue
+                </button>
+            </div>
+        </form>
+<script src="{% static 'shop/js/jquery.bootstrap.modal.forms.js' %}"></script>
+<script src="{% static 'shop/js/jquery.bootstrap.modal.forms.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'shop/js/jquery.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'shop/js/bootstrap.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'shop/js/jquery.validate.min.js' %}"></script>
+{% block js %}
+<script type="text/javascript" src="{% static 'shop/js/easyzoom.js' %}"></script>
+<!-- <script type="text/javascript" src="{% static 'shop/js/main.js' %}"></script> -->
+{% endblock %}
+<script type="text/javascript">
+$(document).ready(function () {
+    $("#signupModalbtn").on("click", form_new_receipt);
+  function form_new_receipt() {
+    $('#loginModal').modal('hide');
+  }
+    $("#login_form").validate({
+    rules: {
+      username: {
+        required: true,
+
+      }, password: {
+        required: true,
+
+      }
+    },
+    highlight: function(element) {
+      $(element).removeClass('is-valid').addClass('is-invalid');
+    },
+    unhighlight: function(element) {
+      $(element).removeClass('is-invalid').addClass('is-valid');
+    },
+  });
+});
+
+</script>

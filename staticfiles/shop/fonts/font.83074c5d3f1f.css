@@ -1,0 +1,48 @@
+@font-face {
+  font-family: 'AstoriaRoman';
+  src: url("AstoriaRoman.09d1acf553d1.eot");
+  src: url("AstoriaRoman.09d1acf553d1.eot?#iefix") format('embedded-opentype'),
+       url("AstoriaRoman.d37914830c25.svg#AstoriaRoman") format('svg'),
+       url("AstoriaRoman.c06266c80167.ttf") format('truetype'),
+       url("AstoriaRoman.ea385e8b5cdb.woff") format('woff'),
+       url("AstoriaRoman.2fb69faa113e.woff2") format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'AstoriaMedium';
+  src: url("AstoriaMedium.cc9cfabe966f.eot");
+  src: url("AstoriaMedium.cc9cfabe966f.eot?#iefix") format('embedded-opentype'),
+       url("AstoriaMedium.219665afc648.svg#AstoriaMedium") format('svg'),
+       url("AstoriaMedium.a1e4eb098569.ttf") format('truetype'),
+       url("AstoriaMedium.8f84300ad44b.woff") format('woff'),
+       url("AstoriaMedium.ee3b40e70e2d.woff2") format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'AstoriaLight';
+  src: url("AstoriaLight.22f2a59db2a3.eot");
+  src: url("AstoriaLight.22f2a59db2a3.eot?#iefix") format('embedded-opentype'),
+       url("AstoriaLight.a76958db5d5f.svg#AstoriaLight") format('svg'),
+       url("AstoriaLight.e244c88b2ec2.ttf") format('truetype'),
+       url("AstoriaLight.01a2f4034d0e.woff") format('woff'),
+       url("AstoriaLight.92fe5361d2c1.woff2") format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Souvenir-Demi';
+  src: url("Souvenir-Demi.6ffb974572d8.eot");
+  src: url("Souvenir-Demi.6ffb974572d8.eot?#iefix") format('embedded-opentype'),
+       url("Souvenir-Demi.230b66c7a75a.svg#Souvenir-Demi") format('svg'),
+       url("Souvenir-Demi.1f5933b05f45.ttf") format('truetype'),
+       url("Souvenir-Demi.2dc9fc076a74.woff") format('woff'),
+       url("Souvenir-Demi.e3c01d48cb31.woff2") format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+

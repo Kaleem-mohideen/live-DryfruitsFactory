@@ -1,0 +1,48 @@
+@font-face {
+  font-family: 'AstoriaRoman';
+  src: url('AstoriaRoman.eot');
+  src: url('AstoriaRoman.eot?#iefix') format('embedded-opentype'),
+       url('AstoriaRoman.svg#AstoriaRoman') format('svg'),
+       url('AstoriaRoman.ttf') format('truetype'),
+       url('AstoriaRoman.woff') format('woff'),
+       url('AstoriaRoman.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'AstoriaMedium';
+  src: url('AstoriaMedium.eot');
+  src: url('AstoriaMedium.eot?#iefix') format('embedded-opentype'),
+       url('AstoriaMedium.svg#AstoriaMedium') format('svg'),
+       url('AstoriaMedium.ttf') format('truetype'),
+       url('AstoriaMedium.woff') format('woff'),
+       url('AstoriaMedium.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'AstoriaLight';
+  src: url('AstoriaLight.eot');
+  src: url('AstoriaLight.eot?#iefix') format('embedded-opentype'),
+       url('AstoriaLight.svg#AstoriaLight') format('svg'),
+       url('AstoriaLight.ttf') format('truetype'),
+       url('AstoriaLight.woff') format('woff'),
+       url('AstoriaLight.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Souvenir-Demi';
+  src: url('Souvenir-Demi.eot');
+  src: url('Souvenir-Demi.eot?#iefix') format('embedded-opentype'),
+       url('Souvenir-Demi.svg#Souvenir-Demi') format('svg'),
+       url('Souvenir-Demi.ttf') format('truetype'),
+       url('Souvenir-Demi.woff') format('woff'),
+       url('Souvenir-Demi.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+

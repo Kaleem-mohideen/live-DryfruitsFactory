@@ -1,0 +1,77 @@
+{% load crispy_forms_tags %}
+{% load widget_tweaks %}
+{% load static %}
+
+
+                    <form id="signup_form" method="POST" action="{% url 'register' %}">
+                        {% csrf_token %}
+                        <fieldset class="form-group">
+                            {{ form|crispy }}
+                        </fieldset>
+                        <div class="form-group">
+                            <div class="mb-3 color-333">
+                                <label class="options-checkbox position-relative pointer">
+                                    <span class="d-inline-block">
+                                        <input type="checkbox" name="agree" id="agree-terms" checked required>
+                                        <span class="custom-checkbox"></span>
+                                    </span>
+                                    <span>
+                                              By clicking CREATE ACCOUNT, you agree to our <a
+                                              href="/all-demos/rongsuto_web/public/terms"
+                                              class="text-underline modal-captionlink">TERMS & CONDITIONS</a> and <a
+                                              href="/all-demos/rongsuto_web/public/privacy-policy"
+                                              class="text-underline modal-captionlink">PRIVACY POLICY</a>
+                                    </span>
+                                </label>
+                            </div>
+                            <button class="btn modalsubmit-btn text-white w-100" id="signupModalSubmit" type="submit">
+                              Create Account
+                            </button>
+                        </div>
+                    </form>
+
+<script src="{% static 'shop/js/jquery.bootstrap.modal.forms.js' %}"></script>
+<script src="{% static 'shop/js/jquery.bootstrap.modal.forms.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'shop/js/jquery.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'shop/js/bootstrap.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'shop/js/jquery.validate.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'shop/js/easyzoom.js' %}"></script>
+<!-- <script type="text/javascript" src="{% static 'shop/js/main.js' %}"></script> -->
+<script type="text/javascript">
+$(document).ready(function () {
+
+
+    $("#signup_form").validate({
+    rules: {
+      username: {
+        required: true,
+      }, first_name: {
+        required: true,
+      }, last_name: {
+        required: true,
+      }, email: {
+        required: true,
+      }, mobile_number: {
+        required: true,
+      }, password1: {
+        required: true,
+      }, password2: {
+        required: true,
+      }
+    },
+    highlight: function(element, errorClass, validClass) {
+        console.log(element)
+
+      $(element).closest('.form-control').removeClass('is-valid').addClass('is-invalid');
+
+    },
+    unhighlight: function(element, errorClass, validClass) {
+        console.log('unhighlight',element)
+      $(element).closest('.form-control').removeClass('is-invalid').addClass('is-valid');
+
+    },
+  });
+
+});
+
+</script>
